@@ -16,10 +16,8 @@ BLE HID Scroll wheel based on ESP32 and AS5600
 - In Windows every time you change the HID Descriptor make sure to remove the paired device via the Bluetooth device screen, not Device Manager as that does not clear the stored Descriptor!
 
 #### Todo:
-- Cleanup code, reduce Report Descriptor to V Scroll only + Multiplier
-- Refine STL files to fix some clearance issues + Add more designs
-- Adjustable multiplier, maybe also increase range
 - Better smoothing, input control, hardcoded as of now
+- Refine STL files to fix some clearance issues + Add more designs
 - Battery support/integration
 - Auto sleep / power saving
 - HID via OTG USB, so that it works without BLE as well PnP
