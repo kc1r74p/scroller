@@ -135,10 +135,6 @@ void BleMouse::begin(void)
     pAdvertising->start();
 }
 
-void BleMouse::end(void)
-{
-}
-
 void BleMouse::scroll(signed char wheel)
 {
     if (this->isConnected())
@@ -150,7 +146,7 @@ void BleMouse::scroll(signed char wheel)
         m[i++] = 0x0;
         m[i++] = wheel;
         m[i++] = 0x00;
-        this->inputMouse->setValue(m, 5);
+        this->inputMouse->setValue(m, sizeof(m));
         this->inputMouse->notify();
     }
 }
@@ -165,10 +161,6 @@ void BleMouse::setBatteryLevel(uint8_t level)
     this->batteryLevel = level;
     if (hid != 0)
         this->hid->setBatteryLevel(this->batteryLevel);
-}
-
-wheelFeatCallback::wheelFeatCallback()
-{
 }
 
 void wheelFeatCallback::onRead(BLECharacteristic *pCharacteristic)
@@ -186,14 +178,7 @@ void wheelFeatCallback::onRead(BLECharacteristic *pCharacteristic)
         ESP_LOGI("####", "setting multipliers");
         uint8_t m[1];
         m[0] = 0x0F;
-        pCharacteristic->setValue(m, 0x1);
+        pCharacteristic->setValue(m, sizeof(m));
         pCharacteristic->notify();
     }
 }
-
-void wheelFeatCallback::onWrite(BLECharacteristic *pCharacteristic)
-{
-    std::string buff = pCharacteristic->getValue();
-    ESP_LOGI("####", "onWrite Feature report data: %d", buff.length());
-}
-

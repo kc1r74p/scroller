@@ -27,9 +27,8 @@ private:
     static void taskServer(void *pvParameter);
 
 public:
-    BleMouse(std::string deviceName = "Scroller", std::string deviceManufacturer = "Custom", uint8_t batteryLevel = 100);
+    BleMouse(std::string deviceName = "Scroller", std::string deviceManufacturer = "kc1r74p", uint8_t batteryLevel = 100);
     void begin(void);
-    void end(void);
     void scroll(signed char wheel = 0);
     bool isConnected(void);
     void setBatteryLevel(uint8_t level);
@@ -44,10 +43,7 @@ protected:
 class wheelFeatCallback : public BLECharacteristicCallbacks
 {
 public:
-    void onWrite(BLECharacteristic *pCharacteristic) override;
     void onRead(BLECharacteristic *pCharacteristic) override;
-
-    wheelFeatCallback();
 };
 
 #endif // CONFIG_BT_ENABLED
